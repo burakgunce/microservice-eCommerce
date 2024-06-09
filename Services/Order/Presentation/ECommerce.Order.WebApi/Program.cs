@@ -1,5 +1,9 @@
 using Ecommerce.Order.Application.Features.CQRS.Handlers.AddressHandlers;
 using Ecommerce.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers;
+using Ecommerce.Order.Application.Interfaces;
+using Ecommerce.Order.Application.Services;
+using ECommerce.Order.Persistence.Repositories;
+
 
 namespace ECommerce.Order.WebApi
 {
@@ -10,6 +14,10 @@ namespace ECommerce.Order.WebApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped(typeof(IOrderingRepository), typeof(OrderingRepository));
+            builder.Services.AddApplicationService(builder.Configuration);
 
             builder.Services.AddScoped<GetAddressQueryHandler>();
             builder.Services.AddScoped<GetAddressByIdQueryHandler>();
