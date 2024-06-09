@@ -1,4 +1,5 @@
-﻿using Ecommerce.Order.Application.Interfaces;
+﻿using Ecommerce.Order.Application.Features.CQRS.Commands.OrderDetailCommands;
+using Ecommerce.Order.Application.Interfaces;
 using ECommerce.Order.Domain.Entities;
 
 namespace Ecommerce.Order.Application.Features.CQRS.Handlers.OrderDetailHandlers
