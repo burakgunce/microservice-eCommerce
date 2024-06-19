@@ -12,7 +12,7 @@ namespace ECommerce.Order.Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("dockerconnstrwillbehere");
+            optionsBuilder.UseSqlServer("Server=localhost,1440;initial Catalog=ECommerceOrderDb;User=sa;Password=123456aA*");//from docker
         }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
