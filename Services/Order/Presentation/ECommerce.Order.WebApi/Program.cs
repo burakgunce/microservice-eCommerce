@@ -4,7 +4,7 @@ using Ecommerce.Order.Application.Interfaces;
 using Ecommerce.Order.Application.Services;
 using ECommerce.Order.Persistence.Context;
 using ECommerce.Order.Persistence.Repositories;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ECommerce.Order.WebApi
 {
@@ -14,8 +14,15 @@ namespace ECommerce.Order.WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.Authority = builder.Configuration["IdentityServerUrl"];
+                opt.Audience = "ResourceOrder";
+                opt.RequireHttpsMetadata = false;
+            });
+
             // Add services to the container.
-            
+
             builder.Services.AddDbContext<OrderContext>();
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -50,6 +57,7 @@ namespace ECommerce.Order.WebApi
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
