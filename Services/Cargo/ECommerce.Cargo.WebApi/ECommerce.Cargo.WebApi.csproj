@@ -20,10 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ECommerce.Cargo.Business\ECommerce.Cargo.Business.csproj" />
     <ProjectReference Include="..\ECommerce.Cargo.DataAccess\ECommerce.Cargo.DataAccess.csproj" />
     <ProjectReference Include="..\ECommerce.Cargo.DtoLayer\ECommerce.Cargo.DtoLayer.csproj" />
