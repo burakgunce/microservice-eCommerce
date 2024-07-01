@@ -3,6 +3,7 @@ using ECommerce.Cargo.Business.Concrete;
 using ECommerce.Cargo.DataAccess.Abstract;
 using ECommerce.Cargo.DataAccess.Context;
 using ECommerce.Cargo.DataAccess.EntityFramework;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ECommerce.Cargo.WebApi
 {
@@ -11,6 +12,13 @@ namespace ECommerce.Cargo.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.Authority = builder.Configuration["IdentityServerUrl"];
+                opt.Audience = "ResourceCargo";
+                opt.RequireHttpsMetadata = false;
+            });
 
             // Add services to the container.
             builder.Services.AddDbContext<CargoContext>();
@@ -40,6 +48,7 @@ namespace ECommerce.Cargo.WebApi
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
